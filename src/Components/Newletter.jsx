@@ -127,6 +127,7 @@ export default function ContactSection({ id }) {
   muted
   loop
   playsInline
+  preload="metadata"
   style={{
     position: "absolute",
     inset: 0,
