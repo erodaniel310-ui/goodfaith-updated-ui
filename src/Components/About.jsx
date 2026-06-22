@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-
+import companyVideo from "../assets/company.mp4";
 const fadeUp = {
   hidden: { opacity: 0, y: 10 },
   visible: { opacity: 1, y: 0 },
@@ -70,10 +70,14 @@ export default function About () {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="overflow-hidden rounded-sm shadow-xl"
             >
-              <img
-                src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&q=80"
+              <video
+                src={companyVideo}
                 alt="Modern city skyline representing development"
                 className="w-full h-80 md:h-96 object-cover hover:scale-105 transition-transform duration-700"
+                autoPlay
+                muted
+                loop
+                playsInline
               />
             </motion.div>
           </div>

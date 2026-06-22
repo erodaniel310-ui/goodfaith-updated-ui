@@ -1,52 +1,85 @@
 import { motion } from "framer-motion";
-import React from 'react';
-import image from "../assets/images.jpg"
+import Heroimg from "../assets/heroimg.mp4"
 
 
 export default function Hero() {
+  const leftContentVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        staggerChildren: 0.18,
+      },
+    },
+  };
+
+  const fadeUpVariants = {
+    hidden: { opacity: 0, y: 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.65, ease: "easeOut" },
+    },
+  };
+
   return (
-<section className="w-full overflow-hidden bg-[#0B1F4D] py-16 lg:py-24 rounded-b-3xl">
+<section className="w-full overflow-hidden bg-[#0B1F4D] py-26 lg:py-24 rounded-b-3xl">
 
   <div className="max-w-screen-xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-0">
 
     {/* Left Content */}
     <div className="flex items-center">
-      <div className="max-w-xl">
+      <motion.div
+        variants={leftContentVariants}
+        initial="hidden"
+        animate="visible"
+        className="max-w-xl"
+      >
 
         <motion.h1
-          initial={{ opacity: 0, x: -60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
+          variants={fadeUpVariants}
           className="text-3xl md:text-5xl font-bold"
         >
           <span className="text-white block">Building Today.</span>
           <span className="text-[#D4AF37] block">Powering Tomorrow.</span>
         </motion.h1>
 
-        <p
+        <motion.p
+          variants={fadeUpVariants}
           className="mt-8 text-gray-200 text-md leading-relaxed"
         >
           Good-Faith Multinational Oil & Gas Services Ltd is a proudly
           Nigerian-owned company delivering integrated solutions in oil &
           gas, real estate, and general construction for a stronger Africa.
-        </p>
+        </motion.p>
 
         <motion.button
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
+          variants={fadeUpVariants}
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.98 }}
           className="mt-10 bg-[#D4AF37] hover:bg-[#c19a2b] text-white font-semibold px-7 py-3 rounded"
+          onClick={() => document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' })}
         >
-          LEARN MORE
+          Contact Us
         </motion.button>
 
-      </div>
+      </motion.div>
     </div>
 
     {/* Right Images */}
     <div className="w-full lg:flex lg:justify-end lg:items-center lg:h-full">
       <div className="w-full h-96 sm:h-[28rem] lg:h-[26rem] lg:w-auto lg:flex-1">
-        <img src={image} alt="img" className="w-full h-full object-cover rounded-xl shadow-lg" />
+        <video
+          src={Heroimg}
+          className="w-full h-full object-cover rounded-xl shadow-lg"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
       </div>
     </div>
 

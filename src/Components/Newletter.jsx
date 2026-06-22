@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Mail, Phone, Send, MapPin, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import bgVideo from "../assets/image.mp4";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -16,7 +17,7 @@ const GOLD_DARK = "#B8941F";
 const NAVY = "#0B1F4D";
 const NAVY_LIGHT = "#102660";
 
-export default function ContactSection() {
+export default function ContactSection({ id }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -25,6 +26,50 @@ export default function ContactSection() {
     message: "",
   });
   const [focused, setFocused] = useState(null);
+  const [office, setOffice] = useState("abuja");
+
+  const officeInfo = {
+    abuja: [
+      {
+        icon: <Mail size={18} />,
+        label: "Email us",
+        value: "Abuja@goodfaith.com.ng",
+        delay: 4,
+      },
+      {
+        icon: <Phone size={18} />,
+        label: "Call us",
+        value: "+234 7071738110",
+        delay: 5,
+      },
+      {
+        icon: <MapPin size={18} />,
+        label: "Headquarters",
+        value: "No 5A Mohammad Abu Ali Crescant Jahi, Abuja, Nigeria",
+        delay: 6,
+      },
+    ],
+    lagos: [
+      {
+        icon: <Mail size={18} />,
+        label: "Email us",
+        value: "Lagos@goodfaith.com.ng",
+        delay: 4,
+      },
+      {
+        icon: <Phone size={18} />,
+        label: "Call us",
+        value: "+234 8101234567",
+        delay: 5,
+      },
+      {
+        icon: <MapPin size={18} />,
+        label: "Office",
+        value: "No 12 Victoria Island, Lagos, Nigeria",
+        delay: 6,
+      },
+    ],
+  };
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -68,7 +113,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact-us"
+    <section id={id || "contact-us"}
       style={{
         background: `linear-gradient(135deg, ${NAVY} 0%, #0d2660 55%, #091840 100%)`,
         position: "relative",
@@ -76,54 +121,34 @@ export default function ContactSection() {
         padding: "96px 24px",
       }}
     >
-      {/* Background orbs */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          top: "-120px",
-          left: "-120px",
-          width: "480px",
-          height: "480px",
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(212,175,55,0.07) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          bottom: "-160px",
-          right: "-80px",
-          width: "560px",
-          height: "560px",
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
-      {/* Subtle grid texture */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage:
-            "linear-gradient(rgba(212,175,55,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.03) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-          pointerEvents: "none",
-        }}
-      />
+<video
+  src={bgVideo}
+  autoPlay
+  muted
+  loop
+  playsInline
+  style={{
+    position: "absolute",
+    inset: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    opacity: 0.28,
+    zIndex: 0,
+    pointerEvents: "none",
+  }}
+/>
 
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
+<div
+  aria-hidden="true"
+  style={{
+    position: "absolute",
+    inset: 0,
+    background: "rgba(11,31,77,0.72)",
+    zIndex: 1,
+    pointerEvents: "none",
+  }}
+/>
         {/* Section label */}
         <motion.div
           variants={fadeUp}
@@ -137,34 +162,21 @@ export default function ContactSection() {
             marginBottom: "64px",
           }}
         >
-          <div
-            style={{
-              width: "36px",
-              height: "2px",
-              background: `linear-gradient(90deg, ${GOLD}, transparent)`,
-            }}
-          />
-          <span
-            style={{
-              fontSize: "11px",
-              fontWeight: 700,
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              color: GOLD,
-            }}
-          >
-            Get in Touch
-          </span>
+        
+       
         </motion.div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "64px",
-            alignItems: "start",
-          }}
-        >
+        <div className="max-w-7xl mx-auto px-6">
+          <div
+            style={{
+              position: "relative",
+              zIndex: 2,
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              gap: "64px",
+              alignItems: "start",
+            }}
+          >
           {/* ── Left panel ── */}
           <div>
             <motion.h2
@@ -211,7 +223,7 @@ export default function ContactSection() {
                 color: "rgba(255,255,255,0.6)",
                 fontSize: "15px",
                 lineHeight: 1.75,
-                marginBottom: "48px",
+                marginBottom: "32px",
                 maxWidth: "420px",
               }}
             >
@@ -220,27 +232,34 @@ export default function ContactSection() {
               seasoned professionals is ready to deliver results at scale.
             </motion.p>
 
+            <div style={{ display: "flex", gap: "12px", marginBottom: "30px" }}>
+              {[
+                { key: "abuja", label: "Abuja Office" },
+                { key: "lagos", label: "Lagos Office" },
+              ].map(({ key, label }) => (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => setOffice(key)}
+                  style={{
+                    padding: "10px 18px",
+                    borderRadius: "999px",
+                    border: office === key ? `1px solid ${GOLD}` : "1px solid rgba(255,255,255,0.18)",
+                    background: office === key ? "rgba(212,175,55,0.12)" : "transparent",
+                    color: "#fff",
+                    cursor: "pointer",
+                    fontSize: "12px",
+                    fontWeight: 600,
+                    transition: "all 0.2s ease",
+                  }}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
             {/* Contact cards */}
-            {[
-              {
-                icon: <Mail size={18} />,
-                label: "Email us",
-                value: "lagos@goodfaith.com.ng",
-                delay: 4,
-              },
-              {
-                icon: <Phone size={18} />,
-                label: "Call us",
-                value: "+234 XXX XXX ",
-                delay: 5,
-              },
-              {
-                icon: <MapPin size={18} />,
-                label: "Headquarters",
-                value: "Lagos, Nigeria",
-                delay: 6,
-              },
-            ].map(({ icon, label, value, delay }) => (
+            {officeInfo[office].map(({ icon, label, value, delay }) => (
               <motion.div
                 key={label}
                 variants={fadeUp}
@@ -500,8 +519,8 @@ export default function ContactSection() {
               </div>
             </form>
           </motion.div>
+          </div>
         </div>
-      </div>
     </section>
   );
 }

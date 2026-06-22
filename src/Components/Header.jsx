@@ -8,7 +8,7 @@ export default function Header() {
       "about-us": "About Us",
       "our-businesses": "Our Businesses",
       "why-choose-us": "Why Choose Us",
-      "contact-us": "Contact Us",
+      "newsletter": "Contact Us",
     };
     const [activeLink, setActiveLink] = useState("Home");
 
@@ -47,16 +47,18 @@ export default function Header() {
     };
   }, []);
 
-  const getLinkHref = (link) =>
-    link === "Home" ? "#" : `#${link.toLowerCase().replace(/ /g, "-")}`;
+  const getLinkHref = (link) => {
+    if (link === "Home") return "#";
+    if (link === "Contact Us") return "#newsletter";
+    return `#${link.toLowerCase().replace(/ /g, "-")}`;
+  };
 
     return (
               <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-white shadow-md" : "bg-transparent"
-        }`}
+scrolled ? "bg-white/80 backdrop-blur-md shadow-md" : "bg-transparent"        }`}
       >
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2">
            <img src={logo} alt="logo" className="w-7 h-7" /> 
@@ -77,7 +79,7 @@ export default function Header() {
                 key={link}
                 href={getLinkHref(link)}
                 onClick={() => setActiveLink(link)}
-                className={`text-sm font-medium tracking-wide transition-colors hover:text-amber-500 ${
+                className={`text-md font-medium tracking-wide transition-colors hover:text-amber-500 ${
                   scrolled ? "text-gray-700" : "text-white"
                 } ${activeLink === link ? "border-b-2 border-amber-500 pb-0.5" : ""}`}
               >

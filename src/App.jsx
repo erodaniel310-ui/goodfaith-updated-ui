@@ -14,7 +14,7 @@ import Newsletter from "./Components/Newletter";
 <About/>
 <Business/>
 <WhyChooseUs/>
-<Newsletter/>
+<Newsletter id="newsletter"/>
 <Footer/>
   </div>
   );

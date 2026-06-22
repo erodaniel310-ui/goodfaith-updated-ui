@@ -1,6 +1,8 @@
 
 import { motion } from "framer-motion";
-
+import apartment from "../assets/apartment.jpg";
+import oil from "../assets/oil.jpg";
+import construct from "../assets/construct.jpg";
 const fadeUp = {
   hidden: { opacity: 0, y: 10 },
   visible: { opacity: 1, y: 0 },
@@ -23,7 +25,7 @@ const BUSINESSES = [
     ),
     title: "Real Estate & Property Development",
     desc: "Residential, commercial, and mixed-use developments that redefine living and working spaces.",
-    img: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80",
+    img: apartment,
   },
   {
     icon: (
@@ -35,7 +37,7 @@ const BUSINESSES = [
     ),
     title: "Oil & Gas",
     desc: "Energy solutions through petroleum product trading, logistics, and reliable distribution networks.",
-    img: "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=600&q=80",
+    img: oil,
   },
   {
     icon: (
@@ -47,7 +49,7 @@ const BUSINESSES = [
     ),
     title: "General Construction",
     desc: "Engineering and construction services covering residential, industrial, and infrastructural projects.",
-    img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80",
+    img: construct,
   },
 ];
 
