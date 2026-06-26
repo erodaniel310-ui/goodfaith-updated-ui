@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Mail, Phone, Send, MapPin, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import bgVideo from "../assets/image.mp4";
+import emailjs from "@emailjs/browser";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -25,15 +26,16 @@ export default function ContactSection({ id }) {
     service: "",
     message: "",
   });
-  const [focused, setFocused] = useState(null);
-  const [office, setOffice] = useState("abuja");
+ const [focused, setFocused] = useState(null);
+const [office, setOffice] = useState("abuja");
+const [loading, setLoading] = useState(false);
 
   const officeInfo = {
     abuja: [
       {
         icon: <Mail size={18} />,
         label: "Email us",
-        value: "Abuja@goodfaith.com.ng",
+        value: "Abuja.goodfaithmultinational@gmail.com",
         delay: 4,
       },
       {
@@ -53,7 +55,7 @@ export default function ContactSection({ id }) {
       {
         icon: <Mail size={18} />,
         label: "Email us",
-        value: "Lagos@goodfaith.com.ng",
+        value: "Lagos.goodfaithmultinational@gmail.com",
         delay: 4,
       },
       {
@@ -65,7 +67,7 @@ export default function ContactSection({ id }) {
       {
         icon: <MapPin size={18} />,
         label: "Office",
-        value: "No 12 Victoria Island, Lagos, Nigeria",
+        value: "Lagos, Nigeria",
         delay: 6,
       },
     ],
@@ -74,11 +76,49 @@ export default function ContactSection({ id }) {
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  setLoading(true);
+
+  try {
+    const result = await emailjs.send(
+      "service_7yj0vmj",
+      "template_o7ryu2w",
+      {
+        from_name: form.name,
+        from_email: form.email,
+        phone: form.phone,
+        service: form.service,
+        message: form.message,
+      },
+      "O9rONAwMlFZm5W78H"
+    );
+
+    console.log("SUCCESS:", result);
+
     alert("Message sent successfully!");
-    setForm({ name: "", email: "", phone: "", service: "", message: "" });
-  };
+
+    setForm({
+      name: "",
+      email: "",
+      phone: "",
+      service: "",
+      message: "",
+    });
+  } catch (error) {
+    console.error("EMAILJS ERROR:", error);
+
+    alert(
+      error?.text ||
+      error?.message ||
+      JSON.stringify(error) ||
+      "Failed to send message."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   const inputBase = {
     width: "100%",
@@ -503,8 +543,8 @@ export default function ContactSection({ id }) {
                     fontFamily: "inherit",
                   }}
                 >
-                  Send Message
-                  <Send size={14} />
+               {loading ? "Sending..." : "Send Message"}
+{!loading && <Send size={14} />}
                 </motion.button>
 
                 <p
