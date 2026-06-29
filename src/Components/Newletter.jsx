@@ -357,6 +357,10 @@ const [loading, setLoading] = useState(false);
                       color: "rgba(255,255,255,0.85)",
                       margin: "2px 0 0",
                       fontWeight: 500,
+                      overflowWrap: "break-word",
+                      wordBreak: "break-word",
+                      whiteSpace: "normal",
+                      maxWidth: "100%",
                     }}
                   >
                     {value}

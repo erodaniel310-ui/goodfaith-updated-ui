@@ -60,7 +60,7 @@ scrolled ? "bg-white/80 backdrop-blur-md shadow-md" : "bg-transparent"        }`
       >
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center cursor-pointer gap-2">
            <img src={logo} alt="logo" className="w-7 h-7" /> 
             <div className="leading-tight">
               <div className={`text-xs font-bold tracking-widest uppercase ${scrolled ? "text-[#1a2744]" : "text-white"}`}>
